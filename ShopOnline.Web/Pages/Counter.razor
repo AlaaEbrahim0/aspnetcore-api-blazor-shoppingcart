@@ -1,23 +1,5 @@
 ﻿
-<button class="btn btn-secondary" style="width: min-content" @onclick="DecrementCount"><i class="bi bi-arrow-down-short"></i></button>
-<span class="mx-1">@currentCount</span>
-<button class="btn btn-secondary" style="width: fit-content" @onclick="IncrementCount"><i class="bi bi-arrow-up-short"></i></button>
 
 @code {
-    [Parameter]
     
-    public int currentCount { get; set; } = 1;
-
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
-
-    private void DecrementCount()
-    {
-        if (currentCount > 1)
-        {
-            currentCount--;
-        }
-    }
 }

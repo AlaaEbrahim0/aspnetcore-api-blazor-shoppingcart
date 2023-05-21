@@ -28,13 +28,47 @@ else
 							@cartItem.ProductDescription
 						</div>
 
-						<span>Price: <b>@cartItem.Price.ToString("c")</b></span>
+						
+						<div>Price: <b>@cartItem.TotalPrices.ToString("c")</b></div>
+						<span></span>
+						<input min="1" class="form-control d-inline mt-3 mb-3" style="width:75px" @bind=@cartItem.Qty type="number" id= "qty" placeholder="qty"/>
+						<label class="form-label" for="qty"></label>
+						<button 
+							class="btn btn-outline-success"
+							@onclick ="async () =>  
+							{
+								await Update_Click(cartItem.Id, cartItem.Qty);
+							}">
+							Update
+						</button>
+
 						<div>
-							<button
-								@onclick = "() => DeleteItem_Click(cartItem.Id)"
-								href="#" 
+							<button 
+								data-bs-toggle="modal"
+								data-bs-target="#modal_@cartItem.Id"
+								type="button"
 								class="btn btn-danger"><i class="bi bi-trash text-white"></i>
 							</button>
+
+							<div class="modal fade" id="modal_@cartItem.Id">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h3 class="modal-title">Delete Confirmation</h3>
+										</div>
+										<div class="modal-body text-center">
+											<p>Are you sure want to remove item:<br> <b>@cartItem.ProductName from the shopping cart</b></p>
+										</div>
+										<div class="modal-footer">
+											<button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+											<button 
+												@onclick="() => DeleteItem_Click(cartItem.Id)"
+												class="btn btn-danger"  
+												data-bs-dismiss="modal">Remove</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					

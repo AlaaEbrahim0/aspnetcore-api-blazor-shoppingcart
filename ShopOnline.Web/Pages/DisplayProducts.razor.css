@@ -4,7 +4,7 @@
 
     a:hover .card {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0);
-        transition: box-shadow 0.3s ease-in-out;
+        transition: box-shadow 0.8s ease-in-out;
     }
 
 .card {
@@ -13,7 +13,7 @@
 }
 
 a:hover img {
-    transform: scale(1.07);
+    transform: scale(1.1);
     transition: .5s ease-in-out;
 }
 

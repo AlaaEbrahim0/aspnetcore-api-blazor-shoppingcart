@@ -15,6 +15,20 @@ namespace ShopOnline.Web.Pages
 		[Inject]
 		public NavigationManager NavigationManager { get; set; }
 
+		public int currentCount { get; set; } = 1;
+		
+		public void IncrementCount()
+		{
+			currentCount++;
+		}
+
+		public void DecrementCount()
+		{
+			if (currentCount > 1)
+			{
+				currentCount--;
+			}
+		}
 
 		[Parameter]
 		public int ProductId { get; set; }
@@ -28,7 +42,6 @@ namespace ShopOnline.Web.Pages
 			try
 			{
 				Product = await ProductService.GetAsync(ProductId);
-
 			}
 			catch (Exception ex)
 			{

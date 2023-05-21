@@ -1,4 +1,7 @@
 ﻿using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using ShopOnline.Models.Dto;
 using ShopOnline.Web.Services.Contracts;
 
@@ -14,11 +17,17 @@ namespace ShopOnline.Web.Services
         }
 
         public event EventHandler CartItemAdded;
+        public event EventHandler CartItemUpdated;
 
-		protected virtual void OnCartItemAdded(EventArgs e)
+		protected void OnCartItemAdded(EventArgs e)
 		{
 			CartItemAdded?.Invoke(this, e);
 		}
+
+        protected void OnCartItemUpdated(EventArgs e)
+        {
+            CartItemUpdated?.Invoke(this, e);
+        }
 
 		public async Task<CartItemDto> AddItemAsync(CartItemToAddDto item)
         {
@@ -93,5 +102,27 @@ namespace ShopOnline.Web.Services
                 throw;
             }
         }
-    }
+
+		public async Task<CartItemDto> UpdateItemAsync(CartItemUpdateQtyDto item)
+		{
+            try
+            {
+                var jsonRequest = JsonConvert.SerializeObject(item);
+                var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json-patch+json");
+
+                var response = await httpClient.PatchAsync($"api/ShoppingCart/{item.Id}", content); 
+                if (response.IsSuccessStatusCode)
+                {
+                    OnCartItemUpdated(EventArgs.Empty);
+                    return await response.Content.ReadFromJsonAsync<CartItemDto>();
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+		}
+	}
 }

@@ -1,62 +1,87 @@
-.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+.navbar {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+background-color: rgba(0,0,0,0.4);
+height: 3.5rem;
 }
 
-.top-row {
-    height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+.navbar-toggler {
+display: none;
 }
 
 .navbar-brand {
-    font-size: 1.1rem;
-}
-
-.oi {
-    width: 2rem;
-    font-size: 1.1rem;
-    vertical-align: text-top;
-    top: -2px;
+font-size: 1.1rem;
+margin-left: 1rem;
 }
 
 .nav-item {
-    font-size: 0.9rem;
-    padding-bottom: 0.5rem;
+margin-right: 1rem;
+list-style: none;
 }
 
-    .nav-item:first-of-type {
-        padding-top: 1rem;
-    }
-
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
-    }
-
-    .nav-item ::deep a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
-
-.nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: white;
+.nav-item a {
+color: #d7d7d7;
+border-radius: 4px;
+height: 3rem;
+display: flex;
+align-items: center;
+line-height: 3rem;
+padding: 0 1rem;
 }
 
-.nav-item ::deep a:hover {
+.nav-item a.active {
+background-color: rgba(255,255,255,0.25);
+color: white;
+}
+
+.nav-item a:hover {
+background-color: rgba(255,255,255,0.1);
+color: white;
+}
+
+@media (max-width: 640px) {
+.navbar {
+flex-direction: column;
+height: auto;
+}
+
+basic
+Copy
+.navbar-toggler {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    margin-right: 1rem;
+}
+
+.navbar-collapse {
+    display: none;
+}
+
+.nav-item {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-item a {
+    display: block;
+    padding: 0.5rem 0;
+}
+
+.nav-item a.active,
+.nav-item a:hover {
     background-color: rgba(255,255,255,0.1);
     color: white;
 }
 
-@media (min-width: 641px) {
-    .navbar-toggler {
-        display: none;
-    }
-
-    .collapse {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
-    }
+.show .navbar-collapse {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.4);
+    padding: 1rem;
+    margin-top: 1rem;
 }

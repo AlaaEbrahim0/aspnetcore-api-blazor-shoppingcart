@@ -16,7 +16,7 @@ else
 	<h3 class="text-center mb-5">Product Details</h3>
 	<div class="row">
 		<div class="col-md-6 mb-4">
-			<img class="rounded img-fluid" src="@Product.ImagePath" width="auto" height="400px" />
+			<img class="rounded img-fluid" src="@Product.ImagePath"/>
 		</div>
 		<div class="col-md-6">
 			<h3>@Product.Name</h3>
@@ -34,18 +34,21 @@ else
 			</p>
 
 			<div>
-				Quantity : 
-				<Counter></Counter>
+				Quantity :
+				<button class="btn btn-secondary" style="width: min-content" @onclick="DecrementCount"><i class="bi bi-arrow-down-short"></i></button>
+				<span class="mx-1">@currentCount</span>
+				<button class="btn btn-secondary" style="width: fit-content" @onclick="IncrementCount"><i class="bi bi-arrow-up-short"></i></button>
+
 				<div class="mt-4">
 					<a class="btn btn-success" href="/ShoppingCart"
 						@onclick="() => AddToCart_Click(new CartItemToAddDto
 					{
 						CartId = 1,
 						ProductId = Product.Id,
-						Quantity = 1
+						Quantity = currentCount
 					})"
-						 style="display:block">
-						<i class="bi bi-cart-plus"></i>
+						 >
+						<i class="bi bi-cart-plus w-auto"></i>
 						Add To Cart
 					</a>
 				</div>

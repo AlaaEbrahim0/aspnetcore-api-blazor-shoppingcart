@@ -19,8 +19,35 @@ namespace ShopOnline.Web.Pages
 		{
 			var item = await ShoppingCartService.RemoveItemAsync(id);
 			RemoveCartItem(id);
-
 		}
+
+		protected async Task Update_Click(int id, int qty)
+		{
+			try
+			{
+
+				var item = new CartItemUpdateQtyDto
+				{
+					Id = id,
+					Qty = qty
+				};
+
+				if (qty <= 0)
+				{
+					item.Qty = 1;
+				}
+				
+				var updatedItem = await ShoppingCartService.UpdateItemAsync(item);
+				
+				
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+		}
+
 		private void RemoveCartItem(int id)
 		{
 			var item = GetCartItem(id);
@@ -41,9 +68,15 @@ namespace ShopOnline.Web.Pages
 				 
 				ShoppingCartService.CartItemAdded += async (sender, e) =>
 				{
-					await LoadItems();
-					StateHasChanged();
+					await Rerender();
 				};
+
+				ShoppingCartService.CartItemUpdated += async (sender, e) =>
+				{
+					await Rerender();
+				};
+
+				
 			}
 			catch (Exception ex)
 			{
@@ -55,6 +88,11 @@ namespace ShopOnline.Web.Pages
 		{
 			ShoppingCartItems = await ShoppingCartService.GetCartItemsAsync(HardCoded.userId);
 
+		}
+		private async Task Rerender()
+		{
+			await LoadItems();
+			StateHasChanged();
 		}
 
 

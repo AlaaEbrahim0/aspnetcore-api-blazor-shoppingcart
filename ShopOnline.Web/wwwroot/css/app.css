@@ -1,7 +1,8 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Wix Madefor Text', sans-serif;
+    font-weight: 700;
 }
 
 h1:focus {
